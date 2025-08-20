@@ -21,7 +21,6 @@ export interface UpdateUserData {
 
 export async function createUser(userData: CreateUserData): Promise<User> {
   try {
-    // Check if user already exists
     const existingUser = await User.findOne({
       where: {
         [Op.or]: [

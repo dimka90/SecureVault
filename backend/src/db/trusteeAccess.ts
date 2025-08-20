@@ -15,8 +15,6 @@ export async function createTrusteeAccess(data: CreateTrusteeAccessData): Promis
     const trusteeVaultId = TrusteeAccess.generateVaultId();
     console.log(`Generated trustee vault ID: ${trusteeVaultId}`);
     const recoveryKeyHash = await TrusteeAccess.hashRecoveryKey(data.recoveryPassword);
-    // Log the creation for debugging
-  
     console.log(`Generated trustee vault12 ID: ${trusteeVaultId}`);
     console.log("My own key", recoveryKeyHash)
     const trusteeAccess = await TrusteeAccess.create({

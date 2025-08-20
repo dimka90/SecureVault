@@ -37,7 +37,6 @@ export async function createVaultController(req: Request, res: Response): Promis
     recoveryPassword  
   } = req.body;
 
-  console.log("I am doing great")
   if (!userId || !title || !encryptedSecret || !recoveryPassword || !trusteeEmail) {
     return res.status(400).send({
       success: false,
