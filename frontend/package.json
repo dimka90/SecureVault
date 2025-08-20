@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@privy-io/react-auth": "^2.21.3",
+    "@types/crypto-js": "^4.2.2",
+    "crypto-js": "^4.2.0",
     "dotenv": "^17.2.1",
     "framer-motion": "^12.23.12",
     "lucide-react": "^0.539.0",
