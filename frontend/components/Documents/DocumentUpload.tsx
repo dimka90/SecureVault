@@ -33,7 +33,7 @@ export default function DocumentUpload() {
   }, [uploadedFile, pin, trusteeEmail, recoveryPeriod]);
 
   return (
-    <div className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-white mt-20">
+    <div className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-indigo-100 mt-20">
       <div className="flex items-center mb-6">
         <FaUpload className="text-indigo-500 text-2xl mr-3" />
         <h2 className="text-xl font-bold">Upload Document</h2>
@@ -59,15 +59,15 @@ export default function DocumentUpload() {
             <FaFile className="text-indigo-500 text-3xl mr-3" />
             <div>
               <p className="font-medium">{uploadedFile.name}</p>
-              <p className="text-sm text-gray-400">
+              <p className="text-sm text-indigo-100/60">
                 {(uploadedFile.size / 1024).toFixed(2)} KB
               </p>
             </div>
           </div>
         ) : (
           <>
-            <FaUpload className="mx-auto text-3xl text-gray-400 mb-3" />
-            <p className="text-gray-300">
+            <FaUpload className="mx-auto text-3xl text-indigo-100/60 mb-3" />
+            <p className="text-indigo-100/65">
               Click to select a file or drag and drop
             </p>
             <p className="text-sm text-gray-500 mt-2">
@@ -84,7 +84,7 @@ export default function DocumentUpload() {
             type="password"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
             placeholder="••••"
             maxLength={4}
           />
@@ -98,7 +98,7 @@ export default function DocumentUpload() {
             type="email"
             value={trusteeEmail}
             onChange={(e) => setTrusteeEmail(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
             placeholder="trustee@example.com"
           />
         </div>
@@ -124,7 +124,7 @@ export default function DocumentUpload() {
               </button>
             ))}
           </div>
-          <p className="mt-2 text-xs text-gray-400">
+          <p className="mt-2 text-xs text-indigo-100/60">
             Trustees will be notified after this period of inactivity
           </p>
         </div>
@@ -135,8 +135,8 @@ export default function DocumentUpload() {
         disabled={!uploadedFile || isUploading || !pin || !trusteeEmail}
         className={`w-full mt-6 py-3 rounded-lg font-medium flex items-center justify-center ${
           uploadedFile && !isUploading && pin && trusteeEmail
-            ? "bg-indigo-500 hover:bg-indigo-600 text-white"
-            : "bg-gray-700 text-gray-400 cursor-not-allowed"
+            ? "bg-indigo-500 hover:bg-indigo-600 text-indigo-100"
+            : "bg-gray-700 text-indigo-100/60 cursor-not-allowed"
         }`}
       >
         {isUploading ? (

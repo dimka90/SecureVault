@@ -18,9 +18,9 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-5 ${
+      className={`fixed top-0 left-0 overflow-x-hidden right-0 z-50 transition-all duration-300 pt-5 ${
         scrolled
-          ? "bg-gray-900 backdrop-blur-lg"
+          ? "bg-gray-900/80 backdrop-blur-lg"
           : "bg-transparent"
       }`}
       initial={{ y: -100 }}

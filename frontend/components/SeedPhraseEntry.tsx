@@ -67,14 +67,14 @@ export default function SeedPhraseEntry() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-white mt-20"
+      className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-indigo-100 mt-20"
     >
       <div className="flex items-center mb-6">
         <FaKey className="text-indigo-500 text-2xl mr-3" />
         <h2 className="text-xl font-bold">Enter Seed Phrase</h2>
       </div>
 
-      <p className="mb-6 text-gray-300">
+      <p className="mb-6 text-indigo-100/65">
         Your seed phrase will be encrypted client-side before storage.
       </p>
 
@@ -86,7 +86,7 @@ export default function SeedPhraseEntry() {
             rows={3}
             value={seedPhrase}
             onChange={(e) => setSeedPhrase(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
           />
         </div>
 
@@ -99,7 +99,7 @@ export default function SeedPhraseEntry() {
             rows={3}
             value={confirmSeedPhrase}
             onChange={(e) => setConfirmSeedPhrase(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
           />
         </div>
 
@@ -110,7 +110,7 @@ export default function SeedPhraseEntry() {
             type="password"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
           />
         </div>
 
@@ -123,7 +123,7 @@ export default function SeedPhraseEntry() {
             type="email"
             value={trusteeEmail}
             onChange={(e) => setTrusteeEmail(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
           />
         </div>
 
@@ -134,7 +134,7 @@ export default function SeedPhraseEntry() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
           />
         </div>
 
@@ -145,11 +145,11 @@ export default function SeedPhraseEntry() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
           />
         </div>
 
-        <div className="flex items-center text-sm text-gray-400">
+        <div className="flex items-center text-sm text-indigo-100/60">
           <FaLock className="mr-2" />
           <span>End-to-end encrypted</span>
         </div>
@@ -158,8 +158,8 @@ export default function SeedPhraseEntry() {
           onClick={handleSubmit}
           className={`w-full py-3 rounded-lg font-medium transition-colors mt-4 ${
             seedPhrase && seedPhrase === confirmSeedPhrase && !loading
-              ? "bg-indigo-500 hover:bg-indigo-600 text-white"
-              : "bg-gray-700 text-gray-400 cursor-not-allowed"
+              ? "bg-indigo-500 hover:bg-indigo-600 text-indigo-100"
+              : "bg-gray-700 text-indigo-100/60 cursor-not-allowed"
           }`}
           disabled={!seedPhrase || seedPhrase !== confirmSeedPhrase || loading}
         >

@@ -39,10 +39,11 @@ const FAQ = () => {
   };
 
   return (
-    <section className="relative py-10 md:py-32 px-6 sm:px-12 md:px-20 lg:px-32 bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-transparent">
+    <section className="relative py-10 md:py-32 px-6 sm:px-12 md:px-20 lg:px-32 bg-black/40">
       <motion.div
-        initial={{ opacity: 0, y: 0 }}
-        animate={{ opacity: 1, y: 30 }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         className="text-center"
       >
@@ -57,11 +58,15 @@ const FAQ = () => {
 
       <div className="max-w-4xl mx-auto mt-16 space-y-6">
         {faqs.map((faq, index) => (
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.3 }}
             key={index}
             className="border border-indigo-500/40 rounded-xl overflow-hidden bg-gray-800/30 shadow-lg"
           >
-            <button
+            <motion.button
               className="w-full flex justify-between items-center px-6 py-5 text-left text-indigo-100 hover:text-indigo-400 transition relative"
               onClick={() => toggleFAQ(index)}
             >
@@ -73,7 +78,7 @@ const FAQ = () => {
               )}
 
               <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-red-500 via-indigo-500 to-red-500 opacity-50"></span>
-            </button>
+            </motion.button>
 
             <AnimatePresence initial={false}>
               {openIndex === index && (
@@ -83,13 +88,13 @@ const FAQ = () => {
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="px-6 pb-6 text-indigo-100/70"
+                  className="px-6 py-3 text-indigo-100/70"
                 >
                   {faq.answer}
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

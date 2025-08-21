@@ -8,7 +8,7 @@ const documents = [
 export default function DocumentList() {
   return (
     <div 
-      className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-white"
+      className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-indigo-100"
     >
       <h2 className="text-xl font-bold mb-6">Your Documents</h2>
       
@@ -19,25 +19,25 @@ export default function DocumentList() {
               <FaFile className="text-indigo-400 mr-3 text-xl" />
               <div>
                 <p className="font-medium">{doc.name}</p>
-                <p className="text-sm text-gray-400">{doc.date}</p>
+                <p className="text-sm text-indigo-100/60">{doc.date}</p>
               </div>
             </div>
             
             <div className="flex space-x-3">
               <button 
-                className="p-2 text-gray-400 hover:text-indigo-400 transition-colors"
+                className="p-2 text-indigo-100/60 hover:text-indigo-400 transition-colors"
                 title="View CID"
               >
                 <FaLink />
               </button>
               <button 
-                className="p-2 text-gray-400 hover:text-indigo-400 transition-colors"
+                className="p-2 text-indigo-100/60 hover:text-indigo-400 transition-colors"
                 title="Download"
               >
                 <FaDownload />
               </button>
               <button 
-                className="p-2 text-gray-400 hover:text-red-400 transition-colors"
+                className="p-2 text-indigo-100/60 hover:text-red-400 transition-colors"
                 title="Delete"
               >
                 <FaTrash />

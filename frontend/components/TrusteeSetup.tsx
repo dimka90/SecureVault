@@ -16,14 +16,14 @@ export default function TrusteeSetup() {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="max-w-md mx-auto p-6 rounded-lg bg-gray-800 text-white"
+      className="max-w-md mx-auto p-6 rounded-lg bg-gray-800 text-indigo-100"
     >
       <div className="flex items-center mb-6">
         <FaUserShield className="text-indigo-500 text-2xl mr-3" />
         <h2 className="text-xl font-bold">Setup Recovery Trustees</h2>
       </div>
       
-      <p className="mb-6 text-gray-300">
+      <p className="mb-6 text-indigo-100/70">
         Enter email addresses of 3 trustees who can help recover your account if needed.
       </p>
       
@@ -36,7 +36,7 @@ export default function TrusteeSetup() {
                 placeholder={`Trustee ${index + 1} email`}
                 value={trustee}
                 onChange={(e) => handleChange(index, e.target.value)}
-                className="bg-transparent w-full outline-none text-white"
+                className="bg-transparent w-full outline-none text-indigo-100"
               />
             </div>
             {trustee.includes('@') && (
@@ -48,7 +48,7 @@ export default function TrusteeSetup() {
         <button 
           className={`w-full py-3 rounded-lg font-medium transition-colors mt-6 ${
             trustees.every(t => t.includes('@')) 
-              ? 'bg-indigo-500 hover:bg-indigo-600 text-white'
+              ? 'bg-indigo-500 hover:bg-indigo-600 text-indigo-100'
               : 'bg-gray-700 text-gray-400 cursor-not-allowed'
           }`}
           disabled={!trustees.every(t => t.includes('@'))}

@@ -19,7 +19,7 @@ export default function AccountCreation() {
   // ];
 
   return (
-    <div className="min-h-screen mt-20 text-white p-4">
+    <div className="min-h-screen mt-20 text-indigo-100 p-4">
       <div className="max-w-4xl mx-auto">
         <div className="py-8">
           {/* <ProgressStepper steps={steps} /> */}
@@ -31,8 +31,8 @@ export default function AccountCreation() {
               onClick={() => setActiveTab("seed")}
               className={`px-4 py-2 text-sm font-medium rounded-l-lg ${
                 activeTab === "seed"
-                  ? "bg-indigo-500 text-white"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  ? "bg-indigo-500 text-indigo-100"
+                  : "bg-gray-800 text-indigo-100/65 hover:bg-gray-700"
               }`}
             >
               Seed Phrase
@@ -41,8 +41,8 @@ export default function AccountCreation() {
               onClick={() => setActiveTab("bank")}
               className={`px-4 py-2 text-sm font-medium ${
                 activeTab === "bank"
-                  ? "bg-indigo-500 text-white"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  ? "bg-indigo-500 text-indigo-100"
+                  : "bg-gray-800 text-indigo-100/65 hover:bg-gray-700"
               }`}
             >
               Bank Details
@@ -51,8 +51,8 @@ export default function AccountCreation() {
               onClick={() => setActiveTab("documents")}
               className={`px-4 py-2 text-sm font-medium rounded-r-lg ${
                 activeTab === "documents"
-                  ? "bg-indigo-500 text-white"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  ? "bg-indigo-500 text-indigo-100"
+                  : "bg-gray-800 text-indigo-100/65 hover:bg-gray-700"
               }`}
             >
               Documents

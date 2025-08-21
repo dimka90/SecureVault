@@ -23,7 +23,7 @@ export default function ProgressStepper({ steps }: ProgressStepperProps) {
             {step.status === 'complete' ? (
               <div className="flex items-center">
                 <span className="h-8 w-8 flex items-center justify-center rounded-full bg-indigo-500">
-                  <FaCheck className="h-4 w-4 text-white" />
+                  <FaCheck className="h-4 w-4 text-indigo-100" />
                 </span>
                 <span className="ml-3 text-sm font-medium text-indigo-400">{step.name}</span>
               </div>
@@ -32,14 +32,14 @@ export default function ProgressStepper({ steps }: ProgressStepperProps) {
                 <span className="h-8 w-8 flex items-center justify-center rounded-full border-2 border-indigo-500">
                   <FaCircle className="h-2.5 w-2.5 text-indigo-500" />
                 </span>
-                <span className="ml-3 text-sm font-medium text-white">{step.name}</span>
+                <span className="ml-3 text-sm font-medium text-indigo-100">{step.name}</span>
               </div>
             ) : (
               <div className="flex items-center">
                 <span className="h-8 w-8 flex items-center justify-center rounded-full border-2 border-gray-600">
-                  <FaCircle className="h-2.5 w-2.5 text-gray-500" />
+                  <FaCircle className="h-2.5 w-2.5 text-indigo-100/50" />
                 </span>
-                <span className="ml-3 text-sm font-medium text-gray-400">{step.name}</span>
+                <span className="ml-3 text-sm font-medium text-indigo-100/60">{step.name}</span>
               </div>
             )}
             

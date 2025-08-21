@@ -39,12 +39,12 @@ export default function CreateWalletButton() {
         disabled={status !== 'idle'}
         className={`w-full relative overflow-hidden py-4 px-6 rounded-xl font-medium transition-all ${
           status === 'idle' 
-            ? 'bg-indigo-500 hover:bg-indigo-600 text-white shadow-lg hover:shadow-indigo-500/30'
+            ? 'bg-indigo-500 hover:bg-indigo-600 text-indigo-100 shadow-lg hover:shadow-indigo-500/30'
             : status === 'loading'
-              ? 'bg-indigo-600/80 text-white'
+              ? 'bg-indigo-600/80 text-indigo-100'
               : status === 'success'
-                ? 'bg-green-500/90 text-white'
-                : 'bg-red-500/90 text-white'
+                ? 'bg-green-500/90 text-indigo-100'
+                : 'bg-red-500/90 text-indigo-100'
         }`}
       >
         <AnimatePresence mode="wait">
@@ -102,7 +102,7 @@ export default function CreateWalletButton() {
         </AnimatePresence>
       </button>
 
-      <p className="mt-3 text-center text-sm text-gray-400">
+      <p className="mt-3 text-center text-sm text-indigo-100/60">
         {status === 'idle' && "Generate a new secure wallet address"}
         {status === 'loading' && "This may take a few seconds..."}
         {status === 'success' && "Your wallet is ready to use!"}

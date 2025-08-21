@@ -21,10 +21,10 @@ export default function ShareIndicator({
             key={i} 
             className={`w-8 h-8 rounded-full border-2 border-gray-800 flex items-center justify-center ${
               i < collectedShares 
-                ? 'bg-green-500 text-white' 
+                ? 'bg-green-500 text-indigo-100' 
                 : i < threshold 
-                  ? 'bg-indigo-500 text-white' 
-                  : 'bg-gray-600 text-gray-300'
+                  ? 'bg-indigo-500 text-indigo-100' 
+                  : 'bg-gray-600 text-indigo-100/65'
             }`}
           >
             {i < collectedShares ? (
@@ -46,7 +46,7 @@ export default function ShareIndicator({
             </span>
           )}
         </span>
-        <div className="flex items-center text-xs text-gray-400 mt-0.5">
+        <div className="flex items-center text-xs text-indigo-100/60 mt-0.5">
           <FaClock className="mr-1" />
           <span>{totalShares} total shares available</span>
         </div>

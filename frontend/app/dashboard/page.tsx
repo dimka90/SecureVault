@@ -54,7 +54,7 @@ export default function AccountCreationDashboard() {
   return (
     <>
       <Nav />
-      <div className="flex min-h-screen bg-gray-900 text-white">
+      <div className="flex min-h-screen bg-gray-900 text-indigo-100">
         {/* Sidebar */}
         <div className="w-64 bg-gray-800 border-r border-gray-700 p-4 flex flex-col pt-20 pl-16">
           <nav className="space-y-1">
@@ -62,8 +62,8 @@ export default function AccountCreationDashboard() {
               onClick={() => setActiveTab("dashboard")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
                 activeTab === "dashboard"
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-300 hover:bg-gray-700"
+                  ? "bg-indigo-600 text-indigo-100"
+                  : "text-indigo-100/65 hover:bg-gray-700"
               }`}
             >
               <FaHome className="text-lg" />
@@ -74,8 +74,8 @@ export default function AccountCreationDashboard() {
               onClick={() => setActiveTab("seed")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
                 activeTab === "seed"
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-300 hover:bg-gray-700"
+                  ? "bg-indigo-600 text-indigo-100"
+                  : "text-indigo-100/65 hover:bg-gray-700"
               }`}
             >
               <FaKey className="text-lg" />
@@ -86,8 +86,8 @@ export default function AccountCreationDashboard() {
               onClick={() => setActiveTab("bank")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
                 activeTab === "bank"
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-300 hover:bg-gray-700"
+                  ? "bg-indigo-600 text-indigo-100"
+                  : "text-indigo-100/65 hover:bg-gray-700"
               }`}
             >
               <BsBank className="text-lg" />
@@ -98,8 +98,8 @@ export default function AccountCreationDashboard() {
               onClick={() => setActiveTab("documents")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
                 activeTab === "documents"
-                  ? "bg-indigo-600 text-white"
-                  : "text-gray-300 hover:bg-gray-700"
+                  ? "bg-indigo-600 text-indigo-100"
+                  : "text-indigo-100/65 hover:bg-gray-700"
               }`}
             >
               <FaUpload className="text-lg" />
@@ -114,7 +114,7 @@ export default function AccountCreationDashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-8 overflow-auto">
+        <div className="flex-1 py-8 md:mt-20 px-8 md:px-15 overflow-auto">
           {activeTab === "dashboard" ? (
             <>
               <h2 className="text-2xl font-bold mb-8">Account Overview</h2>
@@ -127,10 +127,10 @@ export default function AccountCreationDashboard() {
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-gray-400 mb-1">
+                        <p className="text-sm text-indigo-100/60 mb-1">
                           {stat.name}
                         </p>
-                        <p className="text-2xl font-bold text-white">
+                        <p className="text-2xl font-bold text-indigo-100">
                           {stat.value}
                         </p>
                       </div>
@@ -152,7 +152,7 @@ export default function AccountCreationDashboard() {
                           ? "text-green-400"
                           : stat.changeType === "negative"
                           ? "text-red-400"
-                          : "text-gray-400"
+                          : "text-indigo-100/60"
                       }`}
                     >
                       {stat.changeType === "positive"
@@ -180,7 +180,7 @@ export default function AccountCreationDashboard() {
 
                   <div className="space-y-5">
                     <div>
-                      <div className="flex justify-between text-sm text-gray-400 mb-2">
+                      <div className="flex justify-between text-sm text-indigo-100/60 mb-2">
                         <span>Check-in progress</span>
                         <span>42 days remaining</span>
                       </div>
@@ -192,7 +192,7 @@ export default function AccountCreationDashboard() {
                       </div>
                     </div>
 
-                    <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg font-medium transition-colors">
+                    <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-indigo-100 py-2.5 rounded-lg font-medium transition-colors">
                       Perform Early Check-in
                     </button>
                   </div>
@@ -208,7 +208,7 @@ export default function AccountCreationDashboard() {
                     <div className="flex items-start justify-between">
                       <div>
                         <p className="font-medium">trustee@example.com</p>
-                        <p className="text-xs text-gray-400 mt-1">
+                        <p className="text-xs text-indigo-100/60 mt-1">
                           Primary contact
                         </p>
                       </div>
@@ -218,7 +218,7 @@ export default function AccountCreationDashboard() {
                     </div>
                   </div>
 
-                  <button className="w-full bg-gray-700 hover:bg-gray-600 text-white py-2.5 rounded-lg font-medium transition-colors">
+                  <button className="w-full bg-gray-700 hover:bg-gray-600 text-indigo-100 py-2.5 rounded-lg font-medium transition-colors">
                     Update Trustee Details
                   </button>
                 </div>

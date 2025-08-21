@@ -36,7 +36,7 @@ export default function SeedPhraseDisplay({
       className="bg-gray-900 p-4 rounded-lg border border-gray-700"
     >
       <div className="flex justify-between items-center mb-3">
-        <h3 className="font-medium text-gray-300">Your Seed Phrase</h3>
+        <h3 className="font-medium text-indigo-100/65">Your Seed Phrase</h3>
         <div className="flex space-x-2">
           <button
             onClick={toggleVisibility}
@@ -45,9 +45,9 @@ export default function SeedPhraseDisplay({
             type="button"
           >
             {isVisible ? (
-              <FaEyeSlash className="text-gray-400" />
+              <FaEyeSlash className="text-indigo-100/60" />
             ) : (
-              <FaEye className="text-gray-400" />
+              <FaEye className="text-indigo-100/60" />
             )}
           </button>
           <button
@@ -59,7 +59,7 @@ export default function SeedPhraseDisplay({
             {copied ? (
               <FaCheck className="text-green-400" />
             ) : (
-              <FaCopy className="text-gray-400" />
+              <FaCopy className="text-indigo-100/60" />
             )}
           </button>
         </div>
@@ -73,7 +73,7 @@ export default function SeedPhraseDisplay({
         </div>
       ) : (
         <div className="p-3 bg-gray-800 rounded-md flex items-center justify-center h-16">
-          <p className="text-gray-500">
+          <p className="text-indigo-100/50">
             Click the eye icon to reveal your seed phrase
           </p>
         </div>

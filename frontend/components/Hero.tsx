@@ -8,19 +8,19 @@ export default function Hero() {
   return (
     <>
     <Navbar />
-      <div className="min-h-screen flex items-center justify-center py-8 px-4 sm:px-8 md:px-16 lg:px-24 bg-[url('/background-image.jpg')] bg-no-repeat bg-cover bg-center text-white">
+      <div className="min-h-screen flex items-center justify-center mt-20 sm:mt-10 md:mt-0 md:py-8 px-4 sm:px-8 md:px-16 lg:px-24 bg-[url('/background-image.jpg')] bg-no-repeat bg-cover bg-center text-indigo-100">
         <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center lg:text-left"
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl font-semibold mb-6"
             >
@@ -29,9 +29,9 @@ export default function Hero() {
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-              className="text-base sm:text-lg text-gray-300 mb-8 leading-relaxed"
+              className="text-base sm:text-lg text-indigo-100/65 mb-8 leading-relaxed"
             >
               Assign trusted friends or family as recovery contacts, so your
               assets are safe no matter what happens.
@@ -39,7 +39,7 @@ export default function Hero() {
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
               className="inline-block"
             >
@@ -55,7 +55,7 @@ export default function Hero() {
           {/* Image Content */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="flex justify-center lg:justify-end"
           >

@@ -33,7 +33,7 @@ const Nav = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl font-bold text-white hover:text-indigo-400 transition-colors"
+            className="text-[22px] md:text-[26px] hover:bg-gradient-to-r bg-gradient-to-tr from-red-500 via-indigo-100 to-indigo-400 text-transparent bg-clip-text font-bold hover:text-transparent transition-colors"
           >
             SecureVault
           </Link>
@@ -46,7 +46,7 @@ const Nav = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden text-gray-300 hover:text-white">
+          <button className="md:hidden text-indigo-100/65 hover:text-indigo-100">
             <svg
               className="w-6 h-6"
               fill="none"

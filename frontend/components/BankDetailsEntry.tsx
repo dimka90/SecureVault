@@ -17,13 +17,13 @@ export default function BankDetailsEntry() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-white mt-20">
+    <div className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-indigo-100 mt-20">
       <div className="flex items-center mb-6">
         <BsBank className="text-indigo-500 text-2xl mr-3" />
         <h2 className="text-xl font-bold">Enter Bank Details</h2>
       </div>
 
-      <p className="mb-6 text-gray-300">
+      <p className="mb-6 text-indigo-100/65">
         Your bank details will be encrypted client-side before storage.
       </p>
 
@@ -36,7 +36,7 @@ export default function BankDetailsEntry() {
             onChange={(e) =>
               setBankDetails({ ...bankDetails, accountName: e.target.value })
             }
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
             placeholder="John Doe"
           />
         </div>
@@ -49,7 +49,7 @@ export default function BankDetailsEntry() {
             onChange={(e) =>
               setBankDetails({ ...bankDetails, PIN: e.target.value })
             }
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white"
+            className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-indigo-100"
             placeholder="••••"
             maxLength={4}
           />
@@ -75,12 +75,12 @@ export default function BankDetailsEntry() {
               </button>
             ))}
           </div>
-          <p className="mt-2 text-xs text-gray-400">
+          <p className="mt-2 text-xs text-indigo-100/60">
             Trustees will be notified after this period of inactivity
           </p>
         </div>
 
-        <div className="flex items-center text-sm text-gray-400 pt-2">
+        <div className="flex items-center text-sm text-indigo-100/60 pt-2">
           <FaLock className="mr-2" />
           <span>End-to-end encrypted</span>
         </div>
@@ -88,8 +88,8 @@ export default function BankDetailsEntry() {
         <button
           className={`w-full py-3 rounded-lg font-medium transition-colors mt-4 ${
             bankDetails.accountName && bankDetails.PIN
-              ? "bg-indigo-500 hover:bg-indigo-600 text-white"
-              : "bg-gray-700 text-gray-400 cursor-not-allowed"
+              ? "bg-indigo-500 hover:bg-indigo-600 text-indigo-100"
+              : "bg-gray-700 text-indigo-100/60 cursor-not-allowed"
           }`}
           disabled={!bankDetails.accountName || !bankDetails.PIN}
         >

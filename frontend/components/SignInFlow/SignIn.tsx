@@ -46,7 +46,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 rounded-lg bg-gray-800 text-white relative">
+    <div className="max-w-md mx-auto p-6 rounded-lg bg-gray-800 text-indigo-100 relative">
       <Toaster
         position="top-center"
         toastOptions={{
@@ -74,15 +74,15 @@ export default function SignIn() {
             exit={{ opacity: 0, x: 10 }}
             transition={{ duration: 0.2 }}
           >
-            <p className="mb-6 text-gray-300">Enter your email to sign in.</p>
+            <p className="mb-6 text-indigo-100/65">Enter your email to sign in.</p>
 
             <div className="space-y-4">
               <div className="flex items-center border border-gray-600 rounded-lg px-4 py-3">
-                <FaEnvelope className="text-gray-400 mr-3" />
+                <FaEnvelope className="text-indigo-100/60 mr-3" />
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="bg-transparent flex-1 outline-none text-white"
+                  className="bg-transparent flex-1 outline-none text-indigo-100"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
@@ -93,8 +93,8 @@ export default function SignIn() {
                 disabled={!email.includes("@") || isLoading}
                 className={`w-full flex items-center justify-center gap-2 py-3 rounded-lg font-medium transition-colors ${
                   email.includes("@") && !isLoading
-                    ? "bg-indigo-500 hover:bg-indigo-600 text-white"
-                    : "bg-gray-700 text-gray-400 cursor-not-allowed"
+                    ? "bg-indigo-500 hover:bg-indigo-600 text-indigo-100"
+                    : "bg-gray-700 text-indigo-100/60 cursor-not-allowed"
                 }`}
               >
                 {isLoading ? (
@@ -119,9 +119,9 @@ export default function SignIn() {
             exit={{ opacity: 0, x: -10 }}
             transition={{ duration: 0.2 }}
           >
-            <p className="mb-6 text-gray-300">
+            <p className="mb-6 text-indigo-100/65">
               We sent a 6-digit code to{" "}
-              <span className="text-white font-medium">{email}</span>. Please
+              <span className="text-indigo-100 font-medium">{email}</span>. Please
               enter it below to verify your email.
             </p>
 
@@ -130,7 +130,7 @@ export default function SignIn() {
                 <input
                   type="text"
                   placeholder="123456"
-                  className="bg-transparent flex-1 outline-none text-white text-center text-2xl tracking-widest"
+                  className="bg-transparent flex-1 outline-none text-indigo-100 text-center text-2xl tracking-widest"
                   onChange={(e) =>
                     setCode(e.target.value.replace(/\D/g, "").slice(0, 6))
                   }
@@ -146,7 +146,7 @@ export default function SignIn() {
                       icon: "✏️",
                     });
                   }}
-                  className="flex-1 border border-gray-600 text-gray-300 hover:bg-gray-700 py-3 rounded-lg font-medium transition-colors"
+                  className="flex-1 border border-gray-600 text-indigo-100/65 hover:bg-gray-700 py-3 rounded-lg font-medium transition-colors"
                 >
                   Back
                 </button>
@@ -155,8 +155,8 @@ export default function SignIn() {
                   disabled={code.length < 6 || isLoading}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-medium transition-colors ${
                     code.length >= 6 && !isLoading
-                      ? "bg-indigo-500 hover:bg-indigo-600 text-white"
-                      : "bg-gray-700 text-gray-400 cursor-not-allowed"
+                      ? "bg-indigo-500 hover:bg-indigo-600 text-indigo-100"
+                      : "bg-gray-700 text-indigo-100/60 cursor-not-allowed"
                   }`}
                 >
                   {isLoading ? (

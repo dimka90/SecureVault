@@ -32,13 +32,13 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="relative overflow-hidden pt-20  h-screen">
+    <section className="relative overflow-hidden md:pt-20  h-screen">
       <div className="bg-indigo-100 pb-20">
-        <h2 className="font-bold text-center text-4xl sm:text-5xl bg-gradient-to-tr from-red-500 via-indigo-400 to-indigo-600 bg-clip-text text-transparent pt-20">
+        <h2 className="font-bold text-center text-[33px] sm:text-5xl bg-gradient-to-tr from-red-500 via-indigo-400 to-indigo-600 bg-clip-text text-transparent pt-10 sm:pt-20">
           What Our Users Say
         </h2>
 
-        <div className="flex overflow-hidden mt-16">
+        <div className="flex overflow-hidden mt-10 sm:mt-16">
           <div className="flex animate-scroll space-x-6 w-max">
             {[...testimonials, ...testimonials].map((t, i) => (
               <div
@@ -55,11 +55,11 @@ export default function Testimonials() {
           </div>
         </div>
       </div>      
-      <div className="w-full bg-gray-900/95 py-10 md:py-32 flex flex-col justify-center text-center items-center text-indigo-100">
+      <div className="w-full bg-black/40 py-15 xs:py-36 md:py-32 flex flex-col justify-center text-center items-center text-indigo-100">
         <h2 className="font-bold text-4xl sm:text-5xl  text-indigo-100 mb-6">
           Ready To Secure Your asset?
         </h2>
-        <Link href='/signup' className="bg-indigo-500 md:px-16 px-10 py-3 md:py-5 rounded-lg text-white text-base md:text-lg font-bold hover:bg-indigo-600">Get Started</Link>
+        <Link href='/signup' className="bg-indigo-500 md:px-14 px-10 py-3 md:py-5 rounded-lg text-white text-base md:text-xl font-bold hover:bg-indigo-600">Get Started</Link>
       </div>
 
       <style jsx>{`
