@@ -19,9 +19,8 @@ export default function CreateWalletButton() {
       toast.success("Wallet created successfully!... Redirecting to account creation page");
       console.log('Wallet created:', wallet);
 
-      // ✅ Redirect after small delay (optional)
       setTimeout(() => {
-        router.push("/dashboard");
+        router.push("/login");
       }, 1200);
     } catch (err) {
       setStatus('error');
