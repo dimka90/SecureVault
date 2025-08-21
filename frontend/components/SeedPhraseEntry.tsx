@@ -3,6 +3,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaKey, FaLock } from "react-icons/fa";
 import { usePrivy } from "@privy-io/react-auth";
+import toast, { Toaster } from "react-hot-toast";
+// import HandleLogin from "./HandleLogin";
 
 export default function SeedPhraseEntry() {
   const { user } = usePrivy();
@@ -14,33 +16,38 @@ export default function SeedPhraseEntry() {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // simulate encryption (replace with real crypto later)
+  // replaceing with backend later
   const encryptSecret = (text: string) => {
-    return btoa(text); // base64 encode for demo
+    return btoa(text);
   };
 
   const handleSubmit = async () => {
-    if (!seedPhrase || seedPhrase !== confirmSeedPhrase) return;
+    if (!seedPhrase || seedPhrase !== confirmSeedPhrase) {
+      toast.error("Seed phrases do not match!");
+      return;
+    }
     if (!user) {
-      alert("You must be logged in first!");
+      toast.error("You must be logged in first!");
       return;
     }
 
     setLoading(true);
+
     try {
       const encryptedSecret = encryptSecret(seedPhrase);
-      const encryptedAESKey = encryptSecret(pin);
+      // const encryptedAESKey = encryptSecret(pin);
 
       const body = {
-        userId: user.id,
-        walletAddress: user.wallet?.address,
+        userId: 1,
         title,
-        description,
         encryptedSecret,
-        encryptedAESKey,
-        secretType: "note",
-        // trusteeEmail,
+        recoveryPassword: pin,
+        trusteeEmail,
+        description,
+        walletAddress: user.wallet?.address,
       };
+
+      console.log("Sending body:", body);
 
       const res = await fetch("http://localhost:3000/api/vaults", {
         method: "POST",
@@ -50,14 +57,22 @@ export default function SeedPhraseEntry() {
         body: JSON.stringify(body),
       });
 
-      if (!res.ok) throw new Error("Failed to save vault");
-
+      if (!res.ok) {
+        const errorResponse = await res.json().catch(() => ({}));
+        console.error(" Backend error:", errorResponse);
+        throw new Error(errorResponse.message || "Failed to save vault");
+      }
       const data = await res.json();
       console.log("Vault saved:", data);
-      alert("Vault saved successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Error saving vault");
+      toast.success("Vault saved successfully!");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error("Error:", err.message);
+        toast.error(err.message);
+      } else {
+        console.error("Unexpected error:", err);
+        toast.error("Unexpected error occurred");
+      }
     } finally {
       setLoading(false);
     }
@@ -69,13 +84,23 @@ export default function SeedPhraseEntry() {
       animate={{ opacity: 1 }}
       className="max-w-6xl mx-auto p-6 rounded-lg bg-gray-800 text-white mt-20"
     >
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: "#1F2937",
+            color: "#FFFFFF",
+            border: "1px solid #374151",
+          },
+        }}
+      />
       <div className="flex items-center mb-6">
         <FaKey className="text-indigo-500 text-2xl mr-3" />
         <h2 className="text-xl font-bold">Enter Seed Phrase</h2>
       </div>
 
       <p className="mb-6 text-gray-300">
-        Your seed phrase will be encrypted client-side before storage.
+        Your seed phrase will be encrypted client-side (demo only).
       </p>
 
       <div className="space-y-4">
@@ -151,7 +176,7 @@ export default function SeedPhraseEntry() {
 
         <div className="flex items-center text-sm text-gray-400">
           <FaLock className="mr-2" />
-          <span>End-to-end encrypted</span>
+          <span>End-to-end encrypted (demo only)</span>
         </div>
 
         <button

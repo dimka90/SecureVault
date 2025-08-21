@@ -143,7 +143,7 @@ export default function SignIn() {
                   onClick={() => {
                     setStep("email");
                     toast("Enter a different email if needed", {
-                      icon: "✏️",
+                      icon: "",
                     });
                   }}
                   className="flex-1 border border-gray-600 text-gray-300 hover:bg-gray-700 py-3 rounded-lg font-medium transition-colors"
