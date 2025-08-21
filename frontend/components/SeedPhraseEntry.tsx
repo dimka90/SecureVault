@@ -38,7 +38,7 @@ export default function SeedPhraseEntry() {
       // const encryptedAESKey = encryptSecret(pin);
 
       const body = {
-        userId: 2,
+        userId: 1,
         title,
         encryptedSecret,
         recoveryPassword: pin,
@@ -191,7 +191,6 @@ export default function SeedPhraseEntry() {
           {loading ? "Encrypting..." : "Encrypt and Continue"}
         </button>
       </div>
-      {/* <HandleLogin /> */}
     </motion.div>
   );
 }
