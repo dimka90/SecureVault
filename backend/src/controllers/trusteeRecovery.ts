@@ -3,6 +3,7 @@ import { getTrusteeAccessByVaultId } from "../db/trusteeAccess";
 import emailService from "../services/email";
 
 const otpStore = new Map<string, { otp: string; expires: number; email: string }>();
+const verifiedOtpStore = new Map<string, { expires: number; email: string }>(); // New: Track verified OTPs
 
 // Generate OTP
 function generateOTP(): string {
@@ -24,8 +25,8 @@ function storeOTP(trusteeVaultId: string, email: string): string {
   return otp;
 }
 
-// Verify OTP
-function verifyOTP(trusteeVaultId: string, inputOTP: string): boolean {
+// Verify OTP and mark as verified
+function verifyAndMarkOTP(trusteeVaultId: string, inputOTP: string): boolean {
   const stored = otpStore.get(trusteeVaultId);
   
   if (!stored || Date.now() > stored.expires) {
@@ -33,10 +34,41 @@ function verifyOTP(trusteeVaultId: string, inputOTP: string): boolean {
     return false;
   }
   
-  return stored.otp === inputOTP;
+  if (stored.otp === inputOTP) {
+    // OTP is valid - mark as verified and give 5 more minutes for recovery password
+    const recoveryExpires = Date.now() + (5 * 60 * 1000); // 5 minutes to enter recovery password
+    verifiedOtpStore.set(trusteeVaultId, { 
+      expires: recoveryExpires, 
+      email: stored.email 
+    });
+    
+    // Clean up the original OTP
+    otpStore.delete(trusteeVaultId);
+    
+    // Auto-cleanup verified OTP after 5 minutes
+    setTimeout(() => {
+      verifiedOtpStore.delete(trusteeVaultId);
+    }, 5 * 60 * 1000);
+    
+    return true;
+  }
+  
+  return false;
 }
 
-// Step 1: Initiate unlock process
+// Check if OTP was previously verified and still valid
+function isOTPVerified(trusteeVaultId: string): boolean {
+  const verified = verifiedOtpStore.get(trusteeVaultId);
+  
+  if (!verified || Date.now() > verified.expires) {
+    verifiedOtpStore.delete(trusteeVaultId);
+    return false;
+  }
+  
+  return true;
+}
+
+// Step 1: Initiate unlock process (unchanged)
 export async function initiateUnlockController(req: Request, res: Response): Promise<Response> {
   const { trusteeVaultId } = req.body;
 
@@ -48,7 +80,6 @@ export async function initiateUnlockController(req: Request, res: Response): Pro
   }
 
   try {
-    // Find trustee access record
     const trusteeAccess = await getTrusteeAccessByVaultId(trusteeVaultId);
 
     if (!trusteeAccess) {
@@ -65,7 +96,6 @@ export async function initiateUnlockController(req: Request, res: Response): Pro
       });
     }
 
-    // Generate and send OTP
     const otp = storeOTP(trusteeVaultId, trusteeAccess.trusteeEmail);
     
     if (process.env.NODE_ENV !== "test") {
@@ -81,7 +111,8 @@ export async function initiateUnlockController(req: Request, res: Response): Pro
           secretType: trusteeAccess.vault?.secretType,
           ownerEmail: trusteeAccess.vault?.user?.email
         },
-        otpSent: process.env.NODE_ENV !== "test"
+        otpSent: process.env.NODE_ENV !== "test",
+        nextStep: "verify-otp"
       }
     });
   } catch (error: any) {
@@ -92,23 +123,74 @@ export async function initiateUnlockController(req: Request, res: Response): Pro
   }
 }
 
-// Step 2: Verify OTP and recovery key, return decrypted secret
-export async function verifyAndRecoverController(req: Request, res: Response): Promise<Response> {
-  const { trusteeVaultId, otp, recoveryPassword } = req.body;
+// Step 2: Verify OTP ONLY
+export async function verifyOTPController(req: Request, res: Response): Promise<Response> {
+  const { trusteeVaultId, otp } = req.body;
 
-  if (!trusteeVaultId || !otp || !recoveryPassword) {
+  if (!trusteeVaultId || !otp) {
     return res.status(400).send({
       success: false,
-      message: "Trustee Vault ID, OTP, and recovery password are required",
+      message: "Trustee Vault ID and OTP are required",
     });
   }
 
   try {
-    // Verify OTP first
-    if (!verifyOTP(trusteeVaultId, otp)) {
+    // Get trustee access record to ensure it exists and is active
+    const trusteeAccess = await getTrusteeAccessByVaultId(trusteeVaultId);
+    if (!trusteeAccess || !trusteeAccess.isActive) {
+      return res.status(400).send({
+        success: false,
+        message: "Vault not found or recovery not active",
+      });
+    }
+
+    // Verify OTP
+    if (!verifyAndMarkOTP(trusteeVaultId, otp)) {
       return res.status(400).send({
         success: false,
         message: "Invalid or expired verification code",
+      });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: "Verification code confirmed. You can now enter your recovery password.",
+      data: {
+        vaultInfo: {
+          title: trusteeAccess.vault?.title,
+          secretType: trusteeAccess.vault?.secretType,
+          ownerEmail: trusteeAccess.vault?.user?.email
+        },
+        otpVerified: true,
+        nextStep: "enter-recovery-password",
+        timeRemaining: "5 minutes" // User has 5 minutes to enter recovery password
+      }
+    });
+  } catch (error: any) {
+    return res.status(500).send({
+      success: false,
+      message: `OTP verification failed: ${error.message}`,
+    });
+  }
+}
+
+// Step 3: Verify recovery password and complete recovery
+export async function verifyRecoveryPasswordController(req: Request, res: Response): Promise<Response> {
+  const { trusteeVaultId, recoveryPassword } = req.body;
+
+  if (!trusteeVaultId || !recoveryPassword) {
+    return res.status(400).send({
+      success: false,
+      message: "Trustee Vault ID and recovery password are required",
+    });
+  }
+
+  try {
+    // First check if OTP was previously verified
+    if (!isOTPVerified(trusteeVaultId)) {
+      return res.status(400).send({
+        success: false,
+        message: "OTP verification required or expired. Please start the recovery process again.",
       });
     }
 
@@ -130,8 +212,8 @@ export async function verifyAndRecoverController(req: Request, res: Response): P
       });
     }
 
-    // Clean up OTP
-    otpStore.delete(trusteeVaultId);
+    // Clean up verified OTP
+    verifiedOtpStore.delete(trusteeVaultId);
 
     // Send notification to owner
     if (process.env.NODE_ENV !== "test" && trusteeAccess.vault?.user?.email) {
@@ -156,7 +238,8 @@ export async function verifyAndRecoverController(req: Request, res: Response): P
         },
         ownerInfo: {
           email: trusteeAccess.vault?.user?.email
-        }
+        },
+        recoveryCompleted: true
       }
     });
   } catch (error: any) {
@@ -167,7 +250,7 @@ export async function verifyAndRecoverController(req: Request, res: Response): P
   }
 }
 
-// Get vault info without starting recovery (for preview)
+// Get vault info without starting recovery (unchanged)
 export async function getVaultInfoController(req: Request, res: Response): Promise<Response> {
   const { trusteeVaultId } = req.params;
 
