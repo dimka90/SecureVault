@@ -9,19 +9,18 @@ interface Vault {
   _id: string;
   userId: string;
   secretType: string;
-  encryptedSecret: string; 
+  encryptedSecret: string;
   createdAt: string;
   updatedAt: string;
 }
 
 interface SeedPhraseDisplayProps {
   recoveryPin: string;
-  userId: number; ///////shouldnt be a number
+  walletAddress: string;
 }
-
 export default function SeedPhraseDisplay({
   recoveryPin,
-  userId,
+  walletAddress,
 }: SeedPhraseDisplayProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
@@ -33,8 +32,9 @@ export default function SeedPhraseDisplay({
     const fetchEncryptedSeed = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/vaults/user/${1}`
+          `http://localhost:3000/api/vaults/wallet/${walletAddress}`
         );
+
         if (!res.ok) {
           throw new Error("Failed to fetch vault data");
         }
@@ -56,7 +56,7 @@ export default function SeedPhraseDisplay({
     };
 
     fetchEncryptedSeed();
-  }, [userId]);
+  }, [walletAddress]);
 
   const toggleVisibility = async (): Promise<void> => {
     if (!isVisible && encryptedSecret) {

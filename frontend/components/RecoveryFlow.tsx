@@ -21,7 +21,7 @@ export default function RecoveryFlow() {
   const [recoveryKey, setRecoveryKey] = useState("");
   const [step, setStep] = useState<Step>("vaultId");
   const [isLoading, setIsLoading] = useState(false);
-  const [userId, setUserId] = useState(""); // Store the actual user ID
+  const [walletAddress, setWalletAddress] = useState("");
 
   const handleSendCode = async (e: FormEvent) => {
     e.preventDefault();
@@ -115,9 +115,11 @@ export default function RecoveryFlow() {
         toast.success("Account recovered successfully!");
         console.log("Recovery Response:", data);
 
-       
-        const actualUserId = data.userId || data.user?.id || trusteeVaultId;
-        setUserId(actualUserId);
+        // Ensure we always capture the walletAddress (fallbacks included)
+        const actualWalletAddress: string =
+          data.walletAddress || data.user?.id || trusteeVaultId || "";
+
+        setWalletAddress(actualWalletAddress);
 
         // Transition to the seed phrase display step
         setStep("seed");
@@ -167,7 +169,7 @@ export default function RecoveryFlow() {
     setTrusteeVaultId("");
     setOtp("");
     setRecoveryKey("");
-    setUserId("");
+    setWalletAddress("");
     setStep("vaultId");
     toast("Starting over - enter your Vault ID");
   };
@@ -375,7 +377,7 @@ export default function RecoveryFlow() {
             >
               <SeedPhraseDisplay
                 recoveryPin={recoveryKey}
-                userId={1} ///// hardcoded
+                walletAddress={walletAddress}
               />
 
               <div className="mt-6 space-y-3">
