@@ -1,23 +1,21 @@
 import { Router } from "express";
 import {
   initiateUnlockController,
-  verifyAndRecoverController,
-  getVaultInfoController
+  getVaultInfoController,
+  verifyOTPController,
+  verifyRecoveryPasswordController  
 } from "../controllers/trusteeRecovery";
 
 const trusteeRouter = Router();
 
-// Get vault info without starting recovery (for preview)
-// GET /api/trustee-recovery/vault/:trusteeVaultId
 trusteeRouter.get("/:trusteeVaultId", getVaultInfoController);
 
 // Step 1: Initiate unlock process - sends OTP to trustee email
 // POST /api/trustee-recovery/initiate
 trusteeRouter.post("/initiate", initiateUnlockController);
 
-// Step 2: Verify OTP and recovery password, return encrypted secret
-// POST /api/trustee-recovery/verify-and-recover
-trusteeRouter.post("/verify-and-recover", verifyAndRecoverController);
+trusteeRouter.post("/verify-otp", verifyOTPController);
+trusteeRouter.post("/verify-recovery-password", verifyRecoveryPasswordController);
 
 export default trusteeRouter;
 

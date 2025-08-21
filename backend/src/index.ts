@@ -45,9 +45,9 @@ if (process.env.NODE_ENV === "development") {
 } else {
   app.use(morgan("combined"));
 }
-app.use("/api/recovery", vaultRecoveryRouter);
+// app.use("/api/recovery", vaultRecoveryRouter);
 app.use("/api/vaults", vaultRouter);
-app.use("/api/trustee-recovery", trusteeRouter);
+app.use("/api/trustee", trusteeRouter);
 app.use("/api", routes);
 
 
