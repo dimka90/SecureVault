@@ -32,7 +32,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link
             href="/"
-            className="text-xl font-bold text-white hover:text-indigo-400 transition-colors"
+            className="text-[22px] hover:bg-gradient-to-r bg-gradient-to-tr from-red-500 via-indigo-100 to-indigo-400 text-transparent bg-clip-text font-bold hover:text-transparent transition-colors"
           >
             SecureVault
           </Link>
@@ -41,10 +41,12 @@ const Navbar = () => {
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
            <div>
-            <Link href='/signup' className="bg-indigo-500 px-4 py-2 rounded-lg text-sm hover:bg-indigo-600">Unlock</Link>
+            <Link href='/signup' className="bg-indigo-500 px-4 py-2 rounded-lg text-white text-sm font-bold hover:bg-indigo-600">Unlock</Link>
            </div>
-           <div>
-            <Link href='/signin' className="border border-indigo-500 px-4 py-2 rounded-lg text-sm hover:bg-gray-600/50">Sign In</Link>
+           <div className="bg-gradient-to-tr rounded-lg p-[1px] from-red-500 via-indigo-100 to-indigo-400">
+            <div className="bg-gray-900 px-4 py-1 rounded-md hover:bg-gray-800">
+              <Link href='/signin' className=" font-bold text-white rounded-lg text-sm">Sign In</Link>
+            </div>
            </div>
           </div>
 
