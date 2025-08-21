@@ -9,7 +9,7 @@ export default function Hero() {
     <>
     <Navbar />
       <div className="min-h-screen flex items-center justify-center py-8 px-4 sm:px-8 md:px-16 lg:px-24 bg-[url('/background-image.jpg')] bg-no-repeat bg-cover bg-center text-white">
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-black/40" />
 
         <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <motion.div
