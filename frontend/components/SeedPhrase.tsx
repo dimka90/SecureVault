@@ -1,33 +1,100 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash, FaCopy, FaCheck } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { decryptData } from "@/lib/encryption"; // adjust import path
+import toast from "react-hot-toast";
+
+interface Vault {
+  _id: string;
+  userId: string;
+  secretType: string;
+  encryptedSecret: string; 
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface SeedPhraseDisplayProps {
-  seedPhrase: string;
+  recoveryPin: string;
+  userId: number; ///////shouldnt be a number
 }
 
 export default function SeedPhraseDisplay({
-  seedPhrase,
+  recoveryPin,
+  userId,
 }: SeedPhraseDisplayProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
+  const [encryptedSecret, setEncryptedSecret] = useState<string>("");
+  const [decryptedSeed, setDecryptedSeed] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const toggleVisibility = (): void => {
+  useEffect(() => {
+    const fetchEncryptedSeed = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:3000/api/vaults/user/${1}`
+        );
+        if (!res.ok) {
+          throw new Error("Failed to fetch vault data");
+        }
+
+        const data: Vault[] = await res.json();
+
+        if (data.length === 0) {
+          toast.error("No vault found for this user");
+          return;
+        }
+
+        setEncryptedSecret(data[0].encryptedSecret);
+      } catch (err) {
+        console.error("Fetch error:", err);
+        toast.error("Unable to fetch encrypted seed phrase");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEncryptedSeed();
+  }, [userId]);
+
+  const toggleVisibility = async (): Promise<void> => {
+    if (!isVisible && encryptedSecret) {
+      try {
+        const plain = await decryptData(encryptedSecret, recoveryPin);
+        setDecryptedSeed(plain);
+      } catch (err) {
+        console.error("Decryption failed:", err);
+        setDecryptedSeed("Invalid PIN or corrupted data");
+        toast.error("Failed to decrypt seed phrase");
+      }
+    }
     setIsVisible(!isVisible);
   };
 
   const copyToClipboard = (): void => {
+    if (!decryptedSeed) return;
+
     navigator.clipboard
-      .writeText(seedPhrase)
+      .writeText(decryptedSeed)
       .then(() => {
         setCopied(true);
+        toast.success("Seed phrase copied to clipboard");
         setTimeout(() => setCopied(false), 2000);
       })
       .catch((err: Error) => {
         console.error("Failed to copy: ", err);
+        toast.error("Failed to copy seed phrase");
       });
   };
+
+  if (loading) {
+    return (
+      <p className="text-gray-500 p-4 bg-gray-900 rounded-lg border border-gray-700">
+        Loading seed phrase...
+      </p>
+    );
+  }
 
   return (
     <motion.div
@@ -43,6 +110,7 @@ export default function SeedPhraseDisplay({
             className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors"
             aria-label={isVisible ? "Hide seed phrase" : "Show seed phrase"}
             type="button"
+            disabled={!encryptedSecret}
           >
             {isVisible ? (
               <FaEyeSlash className="text-gray-400" />
@@ -55,6 +123,7 @@ export default function SeedPhraseDisplay({
             className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors"
             aria-label="Copy to clipboard"
             type="button"
+            disabled={!decryptedSeed}
           >
             {copied ? (
               <FaCheck className="text-green-400" />
@@ -68,7 +137,7 @@ export default function SeedPhraseDisplay({
       {isVisible ? (
         <div className="p-3 bg-gray-800 rounded-md">
           <p className="text-white font-mono text-sm leading-relaxed">
-            {seedPhrase}
+            {decryptedSeed}
           </p>
         </div>
       ) : (

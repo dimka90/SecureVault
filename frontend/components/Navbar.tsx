@@ -2,8 +2,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import WalletAddress from "./Wallet/WalletAddress";
-
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -41,7 +39,7 @@ const Navbar = () => {
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
            <div>
-            <Link href='/signup' className="bg-indigo-500 px-4 py-2 rounded-lg text-sm hover:bg-indigo-600">Unlock</Link>
+            <Link href='/recovery' className="bg-indigo-500 px-4 py-2 rounded-lg text-sm hover:bg-indigo-600">Unlock</Link>
            </div>
            <div>
             <Link href='/signin' className="border border-indigo-500 px-4 py-2 rounded-lg text-sm hover:bg-gray-600/50">Sign In</Link>

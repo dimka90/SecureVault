@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FaKey, FaLock } from "react-icons/fa";
 import { usePrivy } from "@privy-io/react-auth";
 import toast, { Toaster } from "react-hot-toast";
-// import HandleLogin from "./HandleLogin";
+import { encryptData } from "@/lib/encryption";
 
 export default function SeedPhraseEntry() {
   const { user } = usePrivy();
@@ -15,11 +15,6 @@ export default function SeedPhraseEntry() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // replaceing with backend later
-  const encryptSecret = (text: string) => {
-    return btoa(text);
-  };
 
   const handleSubmit = async () => {
     if (!seedPhrase || seedPhrase !== confirmSeedPhrase) {
@@ -34,11 +29,10 @@ export default function SeedPhraseEntry() {
     setLoading(true);
 
     try {
-      const encryptedSecret = encryptSecret(seedPhrase);
-      // const encryptedAESKey = encryptSecret(pin);
+      const encryptedSecret = await encryptData(seedPhrase, pin);
 
       const body = {
-        userId: 1,
+        userId: 1, //////will replace this with userid from backend, for now we use a hardcoded number because the user id is returting a astring while this needs a number
         title,
         encryptedSecret,
         recoveryPassword: pin,
@@ -51,17 +45,16 @@ export default function SeedPhraseEntry() {
 
       const res = await fetch("http://localhost:3000/api/vaults", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
 
       if (!res.ok) {
         const errorResponse = await res.json().catch(() => ({}));
-        console.error(" Backend error:", errorResponse);
+        console.error("Backend error:", errorResponse);
         throw new Error(errorResponse.message || "Failed to save vault");
       }
+
       const data = await res.json();
       console.log("Vault saved:", data);
       toast.success("Vault saved successfully!");
@@ -98,10 +91,6 @@ export default function SeedPhraseEntry() {
         <FaKey className="text-indigo-500 text-2xl mr-3" />
         <h2 className="text-xl font-bold">Enter Seed Phrase</h2>
       </div>
-
-      <p className="mb-6 text-gray-300">
-        Your seed phrase will be encrypted client-side (demo only).
-      </p>
 
       <div className="space-y-4">
         {/* Seed phrase */}

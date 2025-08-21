@@ -16,7 +16,7 @@ export default function CreateWalletButton() {
     try {
       const wallet = await createWallet();
       setStatus('success');
-      toast.success("Wallet created successfully!... Redirecting to account creation page");
+      toast.success("Wallet created successfully!... Redirecting to login page");
       console.log('Wallet created:', wallet);
 
       setTimeout(() => {
