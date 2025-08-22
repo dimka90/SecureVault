@@ -48,16 +48,16 @@ const Problem = () => {
           </p>
 
           <ul className="space-y-4 text-indigo-100/70">
-            <li className="flex items-start gap-3 text-lg">
-              <span className="text-indigo-500 text-2xl"><RiCopyleftFill /></span>
+            <li className="flex items-center gap-3 text-lg">
+              <span className="text-indigo-500 text-xl md:text-2xl"><RiCopyleftFill /></span>
               Forgotten or misplaced seed phrases
             </li>
-            <li className="flex items-start text-lg gap-3">
-              <span className="text-indigo-500 text-2xl"><RiCopyleftFill /></span>
+            <li className="flex items-center text-lg gap-3">
+              <span className="text-indigo-500 text-xl md:text-2xl"><RiCopyleftFill /></span>
               No trusted recovery contacts in case of emergency
             </li>
-            <li className="flex items-start text-lg gap-3">
-              <span className="text-indigo-500 text-2xl"><RiCopyleftFill /></span>
+            <li className="flex items-center text-lg gap-3">
+              <span className="text-indigo-500 text-xl md:text-2xl"><RiCopyleftFill /></span>
               Assets locked forever after death or inactivity
             </li>
           </ul>

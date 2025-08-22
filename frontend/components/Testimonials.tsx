@@ -55,7 +55,7 @@ export default function Testimonials() {
           </div>
         </div>
       </div>      
-      <div className="w-full bg-black/40 py-15 xs:py-36 md:py-32 flex flex-col justify-center text-center items-center text-indigo-100">
+      <div className="w-full bg-black/40 py-15 xs:py-40 md:py-32 flex flex-col justify-center text-center items-center text-indigo-100">
         <h2 className="font-bold text-4xl sm:text-5xl  text-indigo-100 mb-6">
           Ready To Secure Your asset?
         </h2>

@@ -11,10 +11,10 @@ export default function Footer() {
       <div className=" px-6 py-12">
         <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-0 mx-10 md:justify-between md:items-start">
           <div>
-            <Link href="/" className="text-[26px] hover:bg-gradient-to-r bg-gradient-to-tr from-red-600 via-indigo-200 to-indigo-500 text-transparent bg-clip-text font-bold hover:text-transparent transition-colors">
+            <Link href="/" className="text-xl md:text-[26px] hover:bg-gradient-to-r bg-gradient-to-tr from-red-600 via-indigo-200 to-indigo-500 text-transparent bg-clip-text font-bold hover:text-transparent transition-colors">
                 SecureVault
             </Link>            
-            <p className="text-sm w-80">
+            <p className="text-sm w-80 mt-1">
               Assign trusted friends or family as recovery contacts, so your
               assets are safe no matter what happens.
             </p>
