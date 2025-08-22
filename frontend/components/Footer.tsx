@@ -7,7 +7,7 @@ import { FaSquareGithub } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="text-gray-900 bg-indigo-100">
+    <footer className="text-indigo-100 bg-gray-900/90">
       <div className=" px-6 py-12">
         <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-0 mx-10 md:justify-between md:items-start">
           <div>
@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className=" text-gray-900/30 font-semibold mb-3">Learn more</h3>
+            <h3 className=" text-indigo-100/60 font-semibold mb-3">Learn more</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="hover:text-indigo-400 text-base">Home</Link></li>
               <li><Link href="/signup" className="hover:text-indigo-400 text-base">Sign up</Link></li>
@@ -31,7 +31,7 @@ export default function Footer() {
           </div>
 
           <div className="hidden md:block">
-            <h3 className="text-gray-900/30 font-semibold mb-3">Resources</h3>
+            <h3 className="text-indigo-100/60 font-semibold mb-3">Resources</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="#" className="hover:text-indigo-400 text-base">Docs</Link></li>
               <li><Link href="#" className="hover:text-indigo-400 text-base">Features</Link></li>
@@ -41,7 +41,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-gray-900/30 font-semibold mb-3">Follow Us</h3>
+            <h3 className="text-indigo-100/60 font-semibold mb-3">Follow Us</h3>
             <div className="flex space-x-4">
               <Link href="#" className="hover:text-indigo-400 text-2xl">
                 <FaSquareXTwitter />

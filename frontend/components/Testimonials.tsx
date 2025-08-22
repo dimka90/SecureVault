@@ -32,7 +32,7 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="relative overflow-hidden md:pt-20  h-screen">
+    <section className="md:pt-20  min-h-screen">
       <div className="bg-indigo-100 pb-20">
         <h2 className="font-bold text-center text-[33px] sm:text-5xl bg-gradient-to-tr from-red-500 via-indigo-400 to-indigo-600 bg-clip-text text-transparent pt-10 sm:pt-20">
           What Our Users Say

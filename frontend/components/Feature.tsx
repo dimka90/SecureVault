@@ -11,7 +11,7 @@ import { GrFingerPrint } from "react-icons/gr";
 const Feature = () => {
   return (
     <section className=" flex items-center justify-center ">
-      <div className="relative text-indigo-100 py-8 md:py-24 w-full bg-black/40 md:h-screen min-h-screen">
+      <div className="text-indigo-100 py-8 md:py-24 w-full bg-black/40 min-h-screen">
         <motion.div
           initial={{ opacity: 0, y: 0 }}
           whileInView={{ opacity: 1, y: 30 }}

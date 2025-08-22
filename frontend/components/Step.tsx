@@ -10,7 +10,7 @@ const Step = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         viewport={{ once: false, amount: 0.3 }}
-        className="relative py-10 md:py-40 px-6 sm:px-12 md:px-20 lg:px-32 bg-gray-900 md:h-screen">  
+        className="py-10 md:py-40 px-6 sm:px-12 md:px-20 lg:px-32 bg-gray-900 min-h-screen">  
         <motion.h2 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}

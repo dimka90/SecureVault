@@ -7,7 +7,12 @@ import { RiCopyleftFill } from "react-icons/ri";
 
 const Problem = () => {
   return (
-    <section className="relative py-16 md:py-64 px-6 xs:px-10 md:px-20 lg:px-32 bg-indigo-100 md:h-screen">
+    <motion.section 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.3 }}
+            className="py-16 md:py-64 px-6 xs:px-10 md:px-20 lg:px-32 bg-gray-900 min-h-screen">
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -18,7 +23,7 @@ const Problem = () => {
         <div className="flex justify-center">
           <Image
             src="/problem7.jpg" 
-            alt="Lost Wallet"
+            alt="Problem"
             width={700}
             height={200}
             className="drop-shadow-2xl rounded-lg"
@@ -35,14 +40,14 @@ const Problem = () => {
             Have you ever worried about losing your wallet assets?
           </h2>
 
-          <p className="md:text-xl text-lg text-gray-600 leading-relaxed mb-6">
+          <p className="md:text-xl text-lg text-indigo-100 leading-relaxed mb-6">
             Billions of dollars in crypto assets are lost every year because
             people misplace their seed phrases or pass away without leaving
             recovery options. <span className="font-semibold">One mistake</span>{" "}
             could mean your entire digital fortune is gone forever.
           </p>
 
-          <ul className="space-y-4 text-gray-700">
+          <ul className="space-y-4 text-indigo-100/70">
             <li className="flex items-start gap-3 text-lg">
               <span className="text-indigo-500 text-2xl"><RiCopyleftFill /></span>
               Forgotten or misplaced seed phrases
@@ -58,7 +63,7 @@ const Problem = () => {
           </ul>
         </motion.div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -39,7 +39,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="relative py-10 md:py-32 px-6 sm:px-12 md:px-20 lg:px-32 bg-black/40">
+    <section className="py-10 md:py-32 px-6 sm:px-12 md:px-20 lg:px-32 min-h-screen bg-black/40">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
